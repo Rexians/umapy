@@ -9,7 +9,13 @@
   </p>
 </div>
 
-## Install
+## Install (Stable Release)
+
+```bash
+pip install umapy
+```
+
+## Install (Development Release)
 
 ```bash
 pip install git+https://github.com/Rexians/umapy.git
