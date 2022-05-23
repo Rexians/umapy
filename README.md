@@ -9,6 +9,12 @@
   </p>
 </div>
 
+## Install
+
+```bash
+pip install git+https://github.com/Rexians/umapy.git
+```
+
 ## Basic Usage
 
 Get Champ Info-
@@ -16,14 +22,13 @@ Get Champ Info-
 ```py
 from umapy import Client
 
-x = Client()
-y = x.get_champ_info('ABOMINATION',6, 3)
-print(y.name)
+client = Client()
+abom = x.get_champ_info('ABOMINATION',6, 3)
+print(abom.name)
 ```
 
-* Docs soon!!
+- Docs soon!!
 
 ## Contribution
 
 Feel free to contribute by either opening an issue or a pull request.
-
