@@ -207,6 +207,8 @@ class Client(BaseClient):
         r = self.session.get(url)
         response = r.json()
         status = r.status_code
+        if type(tier) == str:
+            raise TypeError("Wrong type for tier: Must be integer")
         if status == 400:
             raise WarError(response['detail'])
         elif status == 500:
