@@ -8,11 +8,12 @@ from umapy._helpers import (
     RosterDict,
     ChampsInfo,
     NodeInfo,
+    WarInfo,
     Location,
     champ_checker,
 )
 
-from .Exceptions.api_errors import APIError, ChampError, NodeError, RosterError
+from .Exceptions.api_errors import APIError, ChampError, NodeError, WarError, RosterError
 
 
 class BaseClient:
@@ -184,6 +185,42 @@ class Client(BaseClient):
                 node_id = nodes_list.index(names) + 1
                 node_ids.append(node_id)
             return node_ids
+
+
+    def get_war_info(self, tier:int) -> WarInfo:
+        """
+        Returns the war info based on the tier provided.
+
+        Parameters
+        ----------
+        tier : int (Required)
+        The tier of alliance war
+        ----------
+
+        - Returns WarInfo object
+        - Raises WarError on incorrect tier data type
+        - Raises WarError on out of bounds tier (>22)
+        - Raises APIError on Internal Server Error
+        """
+
+        url = self.url + f"/war/{tier}"
+        r = self.session.get(url)
+        response = r.json()
+        status = r.status_code
+        if status == 400:
+            raise WarError(response['detail'])
+        elif status == 500:
+            raise APIError(f"Internal Server Error in the API. Status:{status}")
+        else:
+            return WarInfo(
+                json=response,
+                tier=response['tier'],
+                nodes=response['nodes'],
+                difficulty=response['difficulty'],
+                tier_multiplier=response['tier_multiplier'],
+                tier_rank=response['tier_rank'],
+                status=status
+            )    
 
     def get_roster(self, gamename: str) -> Roster:
         """

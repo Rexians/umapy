@@ -280,6 +280,15 @@ class NodeInfo:
     info: str = None
     status: int = None
 
+@dataclass(frozen=True)
+class WarInfo:
+    json: dict = None
+    tier: int = None
+    nodes: dict = None
+    difficulty: str = None
+    tier_multiplier: str = None
+    tier_rank: str = None
+    status: int = None
 
 @dataclass(frozen=True)
 class RosterDict:

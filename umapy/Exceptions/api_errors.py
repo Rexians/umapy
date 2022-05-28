@@ -24,7 +24,15 @@ class NodeError(Exception):
     '''
     def __init__(self, message):
         super().__init__(message)
-        self.message = message    
+        self.message = message   
+
+class WarError(Exception):
+    '''
+    Errors related to Alliance War
+    '''
+    def __init__(self, message):
+        super().__init__(message)
+        self.message = message     
 
 class RosterError(Exception):
     '''
